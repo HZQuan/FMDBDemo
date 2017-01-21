@@ -8,7 +8,6 @@
 
 #import "StudentDataBaseManager.h"
 #define databasename @"student"
-#define databaseinsert @"数据插入"
 
 @implementation StudentDataBaseManager
 +(instancetype) shareStudentDataBaseManager
@@ -24,12 +23,6 @@
 {
     NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) lastObject];
     NSString *dbPath = [docPath stringByAppendingString:databasename];
-   /**
-    self.db = [[FMDatabase alloc] initWithPath:dbPath];
-    if (![_db open]) {
-        NSLog(@"数据库打开失败");
-    }
-    **/
     self.queue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
     [self.queue inDatabase:^(FMDatabase *db) {
         BOOL  result = [db executeUpdate:@"create table student (name text primary key, age text, address text)"];
